@@ -360,6 +360,89 @@ paths:
           description: "Attendance marked successfully"
         400:
           description: "Invalid request"
+          /attendance/{id}:
+    get:
+      tags:
+        - "Attendance"
+      summary: "Get an attendance record by ID"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the attendance record to retrieve"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Attendance"
+        404:
+          description: "Attendance record not found"
+    put:
+      tags:
+        - "Attendance"
+      summary: "Update an attendance record"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the attendance record to update"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "attendance"
+          description: "Updated attendance object"
+          required: true
+          schema:
+            $ref: "#/definitions/Attendance"
+      responses:
+        200:
+          description: "Attendance record updated successfully"
+        400:
+          description: "Invalid request"
+        404:
+          description: "Attendance record not found"
+
+  /grades/{id}:
+    get:
+      tags:
+        - "Grades"
+      summary: "Get a grade by ID"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the grade to retrieve"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Grade"
+        404:
+          description: "Grade not found"
+    put:
+      tags:
+        - "Grades"
+      summary: "Update a grade"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the grade to update"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "grade"
+          description: "Updated grade object"
+          required: true
+          schema:
+            $ref: "#/definitions/Grade"
+      responses:
+        200:
+          description: "Grade updated successfully"
+        400:
+          description: "Invalid request"
+        404:
+          description: "Grade not found"
   /grades:
     post:
       tags:
