@@ -1,0 +1,451 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Mentor-Student API"
+host: "api.example.com"
+basePath: "/v1"
+schemes:
+  - "https"
+paths:
+  /mentors:
+    get:
+      tags:
+        - "Mentors"
+      summary: "Get all mentors"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Mentor"
+    post:
+      tags:
+        - "Mentors"
+      summary: "Create a new mentor"
+      parameters:
+        - in: "body"
+          name: "mentor"
+          description: "Mentor object to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Mentor"
+      responses:
+        201:
+          description: "Mentor created successfully"
+        400:
+          description: "Invalid request"
+  /mentors/{id}:
+    get:
+      tags:
+        - "Mentors"
+      summary: "Get a mentor by ID"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the mentor to retrieve"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Mentor"
+        404:
+          description: "Mentor not found"
+    put:
+      tags:
+        - "Mentors"
+      summary: "Update a mentor"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the mentor to update"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "mentor"
+          description: "Updated mentor object"
+          required: true
+          schema:
+            $ref: "#/definitions/Mentor"
+      responses:
+        200:
+          description: "Mentor updated successfully"
+        400:
+          description: "Invalid request"
+        404:
+          description: "Mentor not found"
+    delete:
+      tags:
+        - "Mentors"
+      summary: "Delete a mentor"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the mentor to delete"
+          required: true
+          type: "integer"
+      responses:
+        204:
+          description: "Mentor deleted successfully"
+        404:
+          description: "Mentor not found"
+  /students:
+    get:
+      tags:
+        - "Students"
+      summary: "Get all students"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+    post:
+      tags:
+        - "Students"
+      summary: "Create a new student"
+      parameters:
+        - in: "body"
+          name: "student"
+          description: "Student object to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Student"
+      responses:
+        201:
+          description: "Student created successfully"
+        400:
+          description: "Invalid request"
+  /students/{id}:
+    get:
+      tags:
+        - "Students"
+      summary: "Get a student by ID"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the student to retrieve"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Student"
+        404:
+          description: "Student not found"
+    put:
+      tags:
+        - "Students"
+      summary: "Update a student"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the student to update"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "student"
+          description: "Updated student object"
+          required: true
+          schema:
+            $ref: "#/definitions/Student"
+      responses:
+        200:
+          description: "Student updated successfully"
+        400:
+          description: "Invalid request"
+        404:
+          description: "Student not found"
+    delete:
+      tags:
+        - "Students"
+      summary: "Delete a student"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the student to delete"
+          required: true
+          type: "integer"
+      responses:
+        204:
+          description: "Student deleted successfully"
+        404:
+          description: "Student not found"
+  /teams:
+    get:
+      tags:
+        - "Teams"
+      summary: "Get all teams"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Team"
+    post:
+      tags:
+        - "Teams"
+      summary: "Create a new team"
+      parameters:
+        - in: "body"
+          name: "team"
+          description: "Team object to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Team"
+      responses:
+        201:
+          description: "Team created successfully"
+        400:
+          description: "Invalid request"
+  /teams/{id}:
+    get:
+      tags:
+        - "Teams"
+      summary: "Get a team by ID"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the team to retrieve"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Team"
+        404:
+          description: "Team not found"
+    put:
+      tags:
+        - "Teams"
+      summary: "Update a team"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the team to update"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "team"
+          description: "Updated team object"
+          required: true
+          schema:
+            $ref: "#/definitions/Team"
+      responses:
+        200:
+          description: "Team updated successfully"
+        400:
+          description: "Invalid request"
+        404:
+          description: "Team not found"
+    delete:
+      tags:
+        - "Teams"
+      summary: "Delete a team"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the team to delete"
+          required: true
+          type: "integer"
+      responses:
+        204:
+          description: "Team deleted successfully"
+        404:
+          description: "Team not found"
+  /sessions:
+    get:
+      tags:
+        - "Sessions"
+      summary: "Get all sessions"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Session"
+    post:
+      tags:
+        - "Sessions"
+      summary: "Create a new session"
+      parameters:
+        - in: "body"
+          name: "session"
+          description: "Session object to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Session"
+      responses:
+        201:
+          description: "Session created successfully"
+        400:
+          description: "Invalid request"
+  /sessions/{id}:
+    get:
+      tags:
+        - "Sessions"
+      summary: "Get a session by ID"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the session to retrieve"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Session"
+        404:
+          description: "Session not found"
+    put:
+      tags:
+        - "Sessions"
+      summary: "Update a session"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the session to update"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "session"
+          description: "Updated session object"
+          required: true
+          schema:
+            $ref: "#/definitions/Session"
+      responses:
+        200:
+          description: "Session updated successfully"
+        400:
+          description: "Invalid request"
+        404:
+          description: "Session not found"
+    delete:
+      tags:
+        - "Sessions"
+      summary: "Delete a session"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "ID of the session to delete"
+          required: true
+          type: "integer"
+      responses:
+        204:
+          description: "Session deleted successfully"
+        404:
+          description: "Session not found"
+  /attendance:
+    post:
+      tags:
+        - "Attendance"
+      summary: "Mark attendance for a student in a session"
+      parameters:
+        - in: "body"
+          name: "attendance"
+          description: "Attendance object to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Attendance"
+      responses:
+        201:
+          description: "Attendance marked successfully"
+        400:
+          description: "Invalid request"
+  /grades:
+    post:
+      tags:
+        - "Grades"
+      summary: "Add a grade for a student in a session"
+      parameters:
+        - in: "body"
+          name: "grade"
+          description: "Grade object to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Grade"
+      responses:
+        201:
+          description: "Grade added successfully"
+        400:
+          description: "Invalid request"
+definitions:
+  Mentor:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+  Student:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      leader:
+        type: "boolean"
+      teamId:
+        type: "integer"
+  Team:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      leaderId:
+        type: "integer"
+      activityId:
+        type: "integer"
+  Session:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      date:
+        type: "string"
+        format: "date-time"
+      activityId:
+        type: "integer"
+  Attendance:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      studentId:
+        type: "integer"
+      sessionId:
+        type: "integer"
+      present:
+        type: "boolean"
+  Grade:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      studentId:
+        type: "integer"
+      sessionId:
+        type: "integer"
+      grade:
+        type: "integer"
+      comment:
+        type: "string"
