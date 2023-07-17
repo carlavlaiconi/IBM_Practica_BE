@@ -19,78 +19,7 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Mentor"
-    post:
-      tags:
-        - "Mentors"
-      summary: "Create a new mentor"
-      parameters:
-        - in: "body"
-          name: "mentor"
-          description: "Mentor object to be created"
-          required: true
-          schema:
-            $ref: "#/definitions/Mentor"
-      responses:
-        201:
-          description: "Mentor created successfully"
-        400:
-          description: "Invalid request"
-  /mentors/{id}:
-    get:
-      tags:
-        - "Mentors"
-      summary: "Get a mentor by ID"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the mentor to retrieve"
-          required: true
-          type: "integer"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/Mentor"
-        404:
-          description: "Mentor not found"
-    put:
-      tags:
-        - "Mentors"
-      summary: "Update a mentor"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the mentor to update"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "mentor"
-          description: "Updated mentor object"
-          required: true
-          schema:
-            $ref: "#/definitions/Mentor"
-      responses:
-        200:
-          description: "Mentor updated successfully"
-        400:
-          description: "Invalid request"
-        404:
-          description: "Mentor not found"
-    delete:
-      tags:
-        - "Mentors"
-      summary: "Delete a mentor"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the mentor to delete"
-          required: true
-          type: "integer"
-      responses:
-        204:
-          description: "Mentor deleted successfully"
-        404:
-          description: "Mentor not found"
+    
   /students:
     get:
       tags:
@@ -103,22 +32,7 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Student"
-    post:
-      tags:
-        - "Students"
-      summary: "Create a new student"
-      parameters:
-        - in: "body"
-          name: "student"
-          description: "Student object to be created"
-          required: true
-          schema:
-            $ref: "#/definitions/Student"
-      responses:
-        201:
-          description: "Student created successfully"
-        400:
-          description: "Invalid request"
+   
   /students/{id}:
     get:
       tags:
@@ -137,29 +51,7 @@ paths:
             $ref: "#/definitions/Student"
         404:
           description: "Student not found"
-    put:
-      tags:
-        - "Students"
-      summary: "Update a student"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the student to update"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "student"
-          description: "Updated student object"
-          required: true
-          schema:
-            $ref: "#/definitions/Student"
-      responses:
-        200:
-          description: "Student updated successfully"
-        400:
-          description: "Invalid request"
-        404:
-          description: "Student not found"
+   
     delete:
       tags:
         - "Students"
@@ -244,21 +136,7 @@ paths:
           description: "Invalid request"
         404:
           description: "Team not found"
-    delete:
-      tags:
-        - "Teams"
-      summary: "Delete a team"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the team to delete"
-          required: true
-          type: "integer"
-      responses:
-        204:
-          description: "Team deleted successfully"
-        404:
-          description: "Team not found"
+   
   /sessions:
     get:
       tags:
@@ -328,56 +206,21 @@ paths:
           description: "Invalid request"
         404:
           description: "Session not found"
-    delete:
-      tags:
-        - "Sessions"
-      summary: "Delete a session"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the session to delete"
-          required: true
-          type: "integer"
-      responses:
-        204:
-          description: "Session deleted successfully"
-        404:
-          description: "Session not found"
+    
   /attendance:
-    post:
-      tags:
-        - "Attendance"
-      summary: "Mark attendance for a student in a session"
-      parameters:
-        - in: "body"
-          name: "attendance"
-          description: "Attendance object to be created"
-          required: true
-          schema:
-            $ref: "#/definitions/Attendance"
-      responses:
-        201:
-          description: "Attendance marked successfully"
-        400:
-          description: "Invalid request"
-          /attendance/{id}:
     get:
       tags:
         - "Attendance"
-      summary: "Get an attendance record by ID"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the attendance record to retrieve"
-          required: true
-          type: "integer"
+      summary: "Get all attendance records"
       responses:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/Attendance"
-        404:
-          description: "Attendance record not found"
+            type: "array"
+            items:
+              $ref: "#/definitions/Attendance"
+          
+  /attendance/{id}:
     put:
       tags:
         - "Attendance"
@@ -390,7 +233,7 @@ paths:
           type: "integer"
         - in: "body"
           name: "attendance"
-          description: "Updated attendance object"
+          description: "Updated attendance record object"
           required: true
           schema:
             $ref: "#/definitions/Attendance"
@@ -401,25 +244,66 @@ paths:
           description: "Invalid request"
         404:
           description: "Attendance record not found"
-
-  /grades/{id}:
+          
+  /attendance/student/{studentId}:
     get:
       tags:
-        - "Grades"
-      summary: "Get a grade by ID"
+        - "Attendance"
+      summary: "Get attendance records by Student ID"
       parameters:
         - in: "path"
-          name: "id"
-          description: "ID of the grade to retrieve"
+          name: "studentId"
+          description: "ID of the student to retrieve attendance records for"
           required: true
           type: "integer"
       responses:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/Grade"
+            type: "array"
+            items:
+              $ref: "#/definitions/Attendance"
         404:
-          description: "Grade not found"
+          description: "Student not found or no attendance records available"
+          
+    post:
+      tags:
+        - "Attendance"
+      summary: "Mark attendance for a student in a session"
+      parameters:
+        - in: "path"
+          name: "studentId"
+          description: "ID of the student to mark attendance for"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "attendance"
+          description: "Attendance object to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Attendance"
+      responses:
+        201:
+          description: "Attendance marked successfully"
+        400:
+          description: "Invalid request"
+
+
+      
+  /grades:
+    get:
+      tags:
+        - "Grades"
+      summary: "Get all grades"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grade"
+
+  /grades/{id}:
     put:
       tags:
         - "Grades"
@@ -442,13 +326,39 @@ paths:
         400:
           description: "Invalid request"
         404:
-          description: "Grade not found"
-  /grades:
+          description: "Grade not found"   
+          
+  /grades/student/{studentId}:
+    get:
+      tags:
+        - "Grades"
+      summary: "Get grades by Student ID"
+      parameters:
+        - in: "path"
+          name: "studentId"
+          description: "ID of the student to retrieve grades for"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grade"
+        404:
+          description: "Student not found or no grades available"
+          
     post:
       tags:
         - "Grades"
       summary: "Add a grade for a student in a session"
       parameters:
+        - in: "path"
+          name: "studentId"
+          description: "ID of the student to add a grade for"
+          required: true
+          type: "integer"
         - in: "body"
           name: "grade"
           description: "Grade object to be created"
@@ -460,6 +370,22 @@ paths:
           description: "Grade added successfully"
         400:
           description: "Invalid request"
+
+  /activities:
+    get:
+      tags:
+        - "Activities"
+      summary: "Get all activities"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Activity"
+
+  
+
 definitions:
   Mentor:
     type: "object"
@@ -470,8 +396,6 @@ definitions:
         type: "string"
       email:
         type: "string"
-      password:
-        type: "string"
   Student:
     type: "object"
     properties:
@@ -480,8 +404,6 @@ definitions:
       name:
         type: "string"
       email:
-        type: "string"
-      password:
         type: "string"
       leader:
         type: "boolean"
@@ -496,8 +418,6 @@ definitions:
         type: "string"
       leaderId:
         type: "integer"
-      activityId:
-        type: "integer"
   Session:
     type: "object"
     properties:
@@ -505,9 +425,7 @@ definitions:
         type: "integer"
       date:
         type: "string"
-        format: "date-time"
-      activityId:
-        type: "integer"
+        format: "date"
   Attendance:
     type: "object"
     properties:
@@ -531,4 +449,11 @@ definitions:
       grade:
         type: "integer"
       comment:
+        type: "string"
+  Activity:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
         type: "string"
