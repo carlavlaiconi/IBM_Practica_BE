@@ -1,380 +1,125 @@
 swagger: "2.0"
 info:
   version: "1.0.0"
-  title: "Mentor-Student API"
-host: "api.example.com"
-basePath: "/v1"
-schemes:
-  - "https"
+  title: "Project API"
+  description: "API documentation for the project entities"
+
+tags:
+  - name: "Users"
+    description: "Operations related to users"
+  - name: "Teams"
+    description: "Operations related to teams"
+  - name: "Activities"
+    description: "Operations related to activities"
+  - name: "Sessions"
+    description: "Operations related to sessions"
+  - name: "Grades"
+    description: "Operations related to grades"
+  - name: "Attendance"
+    description: "Operations related to attendance"
+  - name: "TeamActivities"
+    description: "Operations related to team activities"
+
 paths:
-  /mentors:
+  /users/{id}:
     get:
-      tags:
-        - "Mentors"
-      summary: "Get all mentors"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Mentor"
-    
-  /students:
-    get:
-      tags:
-        - "Students"
-      summary: "Get all students"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Student"
-   
-  /students/{id}:
-    get:
-      tags:
-        - "Students"
-      summary: "Get a student by ID"
+      tags: ["Users"]
+      summary: "Get a user by ID"
       parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the student to retrieve"
+        - name: "id"
+          in: "path"
           required: true
           type: "integer"
       responses:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/Student"
-        404:
-          description: "Student not found"
-   
+            $ref: "#/definitions/User"
+      produces:
+        - "application/json"
     delete:
-      tags:
-        - "Students"
-      summary: "Delete a student"
+      tags: ["Users"]
+      summary: "Delete a user by ID"
       parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the student to delete"
+        - name: "id"
+          in: "path"
           required: true
           type: "integer"
       responses:
         204:
-          description: "Student deleted successfully"
+          description: "User deleted successfully"
         404:
-          description: "Student not found"
-  /teams:
+          description: "User not found"
+
+  /users/team/{teamId}:
     get:
-      tags:
-        - "Teams"
-      summary: "Get all teams"
+      tags: ["Users"]
+      summary: "Get all users in a team"
+      parameters:
+        - name: "teamId"
+          in: "path"
+          required: true
+          type: "integer"
       responses:
         200:
           description: "Successful operation"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Team"
+              $ref: "#/definitions/User"
+      produces:
+        - "application/json"
+
+  /users:
+    get:
+      tags: ["Users"]
+      summary: "Get all users"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+      produces:
+        - "application/json"
+
+  /teams/{id}:
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["Teams"]
+      summary: "Get a team by ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Team"
+      produces:
+        - "application/json"
     post:
-      tags:
-        - "Teams"
+      tags: ["Teams"]
       summary: "Create a new team"
       parameters:
-        - in: "body"
-          name: "team"
-          description: "Team object to be created"
+        - name: "team"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/Team"
       responses:
-        201:
+        200:
           description: "Team created successfully"
-        400:
-          description: "Invalid request"
-  /teams/{id}:
-    get:
-      tags:
-        - "Teams"
-      summary: "Get a team by ID"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the team to retrieve"
-          required: true
-          type: "integer"
-      responses:
-        200:
-          description: "Successful operation"
           schema:
             $ref: "#/definitions/Team"
-        404:
-          description: "Team not found"
-    put:
-      tags:
-        - "Teams"
-      summary: "Update a team"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the team to update"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "team"
-          description: "Updated team object"
-          required: true
-          schema:
-            $ref: "#/definitions/Team"
-      responses:
-        200:
-          description: "Team updated successfully"
-        400:
-          description: "Invalid request"
-        404:
-          description: "Team not found"
-   
-  /sessions:
-    get:
-      tags:
-        - "Sessions"
-      summary: "Get all sessions"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Session"
-    post:
-      tags:
-        - "Sessions"
-      summary: "Create a new session"
-      parameters:
-        - in: "body"
-          name: "session"
-          description: "Session object to be created"
-          required: true
-          schema:
-            $ref: "#/definitions/Session"
-      responses:
-        201:
-          description: "Session created successfully"
-        400:
-          description: "Invalid request"
-  /sessions/{id}:
-    get:
-      tags:
-        - "Sessions"
-      summary: "Get a session by ID"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the session to retrieve"
-          required: true
-          type: "integer"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/Session"
-        404:
-          description: "Session not found"
-    put:
-      tags:
-        - "Sessions"
-      summary: "Update a session"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the session to update"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "session"
-          description: "Updated session object"
-          required: true
-          schema:
-            $ref: "#/definitions/Session"
-      responses:
-        200:
-          description: "Session updated successfully"
-        400:
-          description: "Invalid request"
-        404:
-          description: "Session not found"
-    
-  /attendance:
-    get:
-      tags:
-        - "Attendance"
-      summary: "Get all attendance records"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Attendance"
-          
-  /attendance/{id}:
-    put:
-      tags:
-        - "Attendance"
-      summary: "Update an attendance record"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the attendance record to update"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "attendance"
-          description: "Updated attendance record object"
-          required: true
-          schema:
-            $ref: "#/definitions/Attendance"
-      responses:
-        200:
-          description: "Attendance record updated successfully"
-        400:
-          description: "Invalid request"
-        404:
-          description: "Attendance record not found"
-          
-  /attendance/student/{studentId}:
-    get:
-      tags:
-        - "Attendance"
-      summary: "Get attendance records by Student ID"
-      parameters:
-        - in: "path"
-          name: "studentId"
-          description: "ID of the student to retrieve attendance records for"
-          required: true
-          type: "integer"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Attendance"
-        404:
-          description: "Student not found or no attendance records available"
-          
-    post:
-      tags:
-        - "Attendance"
-      summary: "Mark attendance for a student in a session"
-      parameters:
-        - in: "path"
-          name: "studentId"
-          description: "ID of the student to mark attendance for"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "attendance"
-          description: "Attendance object to be created"
-          required: true
-          schema:
-            $ref: "#/definitions/Attendance"
-      responses:
-        201:
-          description: "Attendance marked successfully"
-        400:
-          description: "Invalid request"
-
-
-      
-  /grades:
-    get:
-      tags:
-        - "Grades"
-      summary: "Get all grades"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Grade"
-
-  /grades/{id}:
-    put:
-      tags:
-        - "Grades"
-      summary: "Update a grade"
-      parameters:
-        - in: "path"
-          name: "id"
-          description: "ID of the grade to update"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "grade"
-          description: "Updated grade object"
-          required: true
-          schema:
-            $ref: "#/definitions/Grade"
-      responses:
-        200:
-          description: "Grade updated successfully"
-        400:
-          description: "Invalid request"
-        404:
-          description: "Grade not found"   
-          
-  /grades/student/{studentId}:
-    get:
-      tags:
-        - "Grades"
-      summary: "Get grades by Student ID"
-      parameters:
-        - in: "path"
-          name: "studentId"
-          description: "ID of the student to retrieve grades for"
-          required: true
-          type: "integer"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Grade"
-        404:
-          description: "Student not found or no grades available"
-          
-    post:
-      tags:
-        - "Grades"
-      summary: "Add a grade for a student in a session"
-      parameters:
-        - in: "path"
-          name: "studentId"
-          description: "ID of the student to add a grade for"
-          required: true
-          type: "integer"
-        - in: "body"
-          name: "grade"
-          description: "Grade object to be created"
-          required: true
-          schema:
-            $ref: "#/definitions/Grade"
-      responses:
-        201:
-          description: "Grade added successfully"
-        400:
-          description: "Invalid request"
+      consumes:
+        - "application/json"
 
   /activities:
     get:
-      tags:
-        - "Activities"
+      tags: ["Activities"]
       summary: "Get all activities"
       responses:
         200:
@@ -383,20 +128,267 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Activity"
+      produces:
+        - "application/json"
 
-  
+  /sessions:
+    get:
+      tags: ["Sessions"]
+      summary: "Get all sessions"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Session"
+      produces:
+        - "application/json"
+        
+  /sessions/{activityId}:
+    parameters:
+      - name: "activityId"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["Sessions"]
+      summary: "Get a session by activity ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Session"
+      produces:
+        - "application/json"
+    post:
+      tags: ["Sessions"]
+      summary: "Create a new session"
+      parameters:
+        - name: "session"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Session"
+      responses:
+        200:
+          description: "Session created successfully"
+          schema:
+            $ref: "#/definitions/Session"
+      consumes:
+        - "application/json"
+
+  /grades/student/{studentId}:
+    parameters:
+      - name: "studentId"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["Grades"]
+      summary: "Get all grades by student ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grade"
+      produces:
+        - "application/json"
+    post:
+      tags: ["Grades"]
+      summary: "Create a new grade"
+      parameters:
+        - name: "grade"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Grade"
+      responses:
+        200:
+          description: "Grade created successfully"
+          schema:
+            $ref: "#/definitions/Grade"
+      consumes:
+        - "application/json"
+        
+  /grades/session/{sessionId}:
+    parameters:
+      - name: "sessionId"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["Grades"]
+      summary: "Get grades by session ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grade"
+      produces:
+        - "application/json"
+
+  /grades/{id}:
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+    put:
+      tags: ["Grades"]
+      summary: "Update grade"
+      parameters:
+        - name: "grade"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Grade"
+      responses:
+        200:
+          description: "Grade updated successfully"
+          schema:
+            $ref: "#/definitions/Grade"
+      consumes:
+        - "application/json"
+      
+
+  /attendance/student/{studentId}:
+    parameters:
+      - name: "studentId"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["Attendance"]
+      summary: "Get all attendance records by student ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Attendance"
+      produces:
+        - "application/json"
+    post:
+      tags: ["Attendance"]
+      summary: "Create a new attendance record"
+      parameters:
+        - name: "attendance"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Attendance"
+      responses:
+        200:
+          description: "Attendance record created successfully"
+          schema:
+            $ref: "#/definitions/Attendance"
+      consumes:
+        - "application/json"
+        
+  /attendance/session/{sessionId}:
+    parameters:
+      - name: "sessionId"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["Attendance"]
+      summary: "Get attendance records by session ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Attendance"
+      produces:
+        - "application/json"
+
+  /attendance/{id}:
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+    put:
+      tags: ["Attendance"]
+      summary: "Update attendance"
+      parameters:
+        - name: "attendance"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Attendance"
+      responses:
+        200:
+          description: "Attendance updated successfully"
+          schema:
+            $ref: "#/definitions/Attendance"
+      consumes:
+        - "application/json"      
+
+  /team-activities/team/{teamId}:
+    parameters:
+      - name: "teamId"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["TeamActivities"]
+      summary: "Get all team activities by team ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/TeamActivity"
+      produces:
+        - "application/json"
+    post:
+      tags: ["TeamActivities"]
+      summary: "Create a new team activity"
+      parameters:
+        - name: "teamActivity"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/TeamActivity"
+      responses:
+        200:
+          description: "Team activity created successfully"
+          schema:
+            $ref: "#/definitions/TeamActivity"
+      consumes:
+        - "application/json"
+        
+  /team-activities/activity/{activityId}:
+    parameters:
+      - name: "activityId"
+        in: "path"
+        required: true
+        type: "integer"
+    get:
+      tags: ["TeamActivities"]
+      summary: "Get all team activities by activity ID"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/TeamActivity"
+      produces:
+        - "application/json"      
 
 definitions:
-  Mentor:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-      name:
-        type: "string"
-      email:
-        type: "string"
-  Student:
+  User:
     type: "object"
     properties:
       id:
@@ -409,6 +401,8 @@ definitions:
         type: "boolean"
       teamId:
         type: "integer"
+      mentor:
+        type: "boolean"
   Team:
     type: "object"
     properties:
@@ -416,8 +410,13 @@ definitions:
         type: "integer"
       name:
         type: "string"
-      leaderId:
+  Activity:
+    type: "object"
+    properties:
+      id:
         type: "integer"
+      name:
+        type: "string"
   Session:
     type: "object"
     properties:
@@ -425,18 +424,8 @@ definitions:
         type: "integer"
       date:
         type: "string"
-        format: "date"
-  Attendance:
-    type: "object"
-    properties:
-      id:
+      activityId:
         type: "integer"
-      studentId:
-        type: "integer"
-      sessionId:
-        type: "integer"
-      present:
-        type: "boolean"
   Grade:
     type: "object"
     properties:
@@ -450,10 +439,23 @@ definitions:
         type: "integer"
       comment:
         type: "string"
-  Activity:
+  Attendance:
     type: "object"
     properties:
       id:
         type: "integer"
-      name:
-        type: "string"
+      studentId:
+        type: "integer"
+      sessionId:
+        type: "integer"
+      present:
+        type: "boolean"
+  TeamActivity:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      teamId:
+        type: "integer"
+      activityId:
+        type: "integer"
