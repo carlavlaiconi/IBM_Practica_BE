@@ -14,24 +14,22 @@ public class H2DatabaseConnection {
             Statement statement = connection.createStatement();
 
             // Execute a database operation (create a table)
-            String createTableQuery = "CREATE TABLE users (id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), leader BOOLEAN, mentor BOOLEAN, teamId INTEGER)";
+            String createTableQuery = "CREATE TABLE users (id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), role VARCHAR(255), teamId INT)";
             statement.execute(createTableQuery);
 
-            String insertUserQuery = "INSERT INTO users (id, name, email, leader, mentor, teamId) VALUES (?, ?, ?, ?, ?, ?)";
+            String insertUserQuery = "INSERT INTO users (id, name, email, role, teamId) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement userStatement = connection.prepareStatement(insertUserQuery)) {
                 userStatement.setInt(1, 1);
                 userStatement.setString(2, "John Doe");
                 userStatement.setString(3, "john.doe@example.com");
-                userStatement.setBoolean(4, true); // leader = true
-                userStatement.setBoolean(5, false); // mentor = false
+                userStatement.setString(4,  String.valueOf(Role.leader));
                 userStatement.setInt(6, 101); // teamId = 101
                 userStatement.executeUpdate();
 
                 userStatement.setInt(1, 2);
                 userStatement.setString(2, "Jane Smith");
                 userStatement.setString(3, "jane.smith@example.com");
-                userStatement.setBoolean(4, false); // leader = false
-                userStatement.setBoolean(5, true); // mentor = true
+                userStatement.setString(4, String.valueOf(Role.mentor));
                 userStatement.setInt(6, 102); // teamId = 102
                 userStatement.executeUpdate();
             }
@@ -103,16 +101,17 @@ public class H2DatabaseConnection {
             }
 
             // Create the "grade" table and populate it
-            createTableQuery = "CREATE TABLE grade (id INT PRIMARY KEY, studentId INT, sessionId INT, grade INT, comment VARCHAR(255))";
+            createTableQuery = "CREATE TABLE grade (id INT PRIMARY KEY, studentId INT, sessionId INT, grade INT, comment VARCHAR(255), mentorId INT)";
             statement.execute(createTableQuery);
 
-            String insertGradeQuery = "INSERT INTO grade (id, studentId, sessionId, grade, comment) VALUES (?, ?, ?, ?, ?)";
+            String insertGradeQuery = "INSERT INTO grade (id, studentId, sessionId, grade, comment, mentorId) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement gradeStatement = connection.prepareStatement(insertGradeQuery)) {
                 gradeStatement.setInt(1, 1);
                 gradeStatement.setInt(2, 1);
                 gradeStatement.setInt(3, 1);
                 gradeStatement.setInt(4, 90);
                 gradeStatement.setString(5, "Good work!");
+                gradeStatement.setInt(6, 102);
                 gradeStatement.executeUpdate();
 
                 gradeStatement.setInt(1, 2);
@@ -120,6 +119,7 @@ public class H2DatabaseConnection {
                 gradeStatement.setInt(3, 2);
                 gradeStatement.setInt(4, 85);
                 gradeStatement.setString(5, "Needs improvement.");
+                gradeStatement.setInt(6, 102);
                 gradeStatement.executeUpdate();
             }
 
