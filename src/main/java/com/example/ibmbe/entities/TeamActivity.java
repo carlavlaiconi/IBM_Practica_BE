@@ -9,7 +9,7 @@ import lombok.Data;
 public class TeamActivity extends BaseEntity{
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "teamId", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "teamId", referencedColumnName = "id", nullable = false)
     private Team team;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

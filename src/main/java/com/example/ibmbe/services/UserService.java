@@ -17,7 +17,7 @@ public class UserService {
 
     public User getUser (final Long id) {
         Optional<User> userOptional =  userRepository.findById(id);
-        return userOptional.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND,"No user with id : " + id + "found."));
+        return userOptional.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No user with id: " + id + " found"));
     }
 
     public List<User> getAllUsers () {
@@ -26,7 +26,7 @@ public class UserService {
 
     public List<User> getUserByTeamId (final Long teamId) {
         Optional<List<User>> users = Optional.ofNullable(userRepository.findByTeamId(teamId));
-        return users.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No user with this team id : " + teamId + "found."));
+        return users.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No user with this team id: " + teamId + " found"));
     }
 
     public boolean deleteUserById (Long id) {
@@ -34,6 +34,6 @@ public class UserService {
             userRepository.deleteById(id);
             return true;
         }
-        throw(new CustomException(HttpStatus.NOT_FOUND,"No user with id : " + id + "found."));
+        throw(new CustomException(HttpStatus.NOT_FOUND, "No user with id: " + id + " found"));
     }
 }

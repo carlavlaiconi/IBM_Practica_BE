@@ -16,11 +16,10 @@ public class TeamService {
 
     public Team getTeam (final Long id) {
         Optional<Team> teamOptional =  teamRepository.findById(id);
-        return teamOptional.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND,"No team with id : " + id + "found."));
+        return teamOptional.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No team with id: " + id + " found"));
     }
 
     public Team saveTeam (final Team team) {
-
         return teamRepository.save(team);
     }
 }

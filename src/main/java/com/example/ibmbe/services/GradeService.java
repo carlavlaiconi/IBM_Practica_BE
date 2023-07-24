@@ -17,13 +17,13 @@ public class GradeService {
 
     public List<Grade> getGradeByStudentId (final Long studentId) {
         Optional<List<Grade>> grades = Optional.ofNullable(gradeRepository.findByStudentId(studentId));
-        return grades.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No grade with this student id : " + studentId + "found."));
+        return grades.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No grade with this student id: " + studentId + " found"));
     }
 
     public List<Grade> getGradeBySessionId (final Long sessionId) {
 
         Optional<List<Grade>> grades = Optional.ofNullable(gradeRepository.findBySessionId(sessionId));
-        return grades.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No grade with this session id : " + sessionId + "found."));
+        return grades.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No grade with this session id: " + sessionId + " found"));
     }
 
     public Grade saveGrade (final Grade grade) {

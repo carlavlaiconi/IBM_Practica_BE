@@ -17,7 +17,7 @@ public class SessionService {
 
     public List<Session> getSessionByActivityId (final Long activityId) {
         Optional<List<Session>> sessionList = Optional.ofNullable(sessionRepository.findByActivityId(activityId));
-        return sessionList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No sessions found for the activity with id : " + activityId));
+        return sessionList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No sessions found for the activity with id: " + activityId));
     }
 
     public List<Session> getAllSessions () {

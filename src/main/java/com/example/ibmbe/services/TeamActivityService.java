@@ -17,12 +17,12 @@ public class TeamActivityService {
 
     public List<TeamActivity> getByTeamId (final Long teamId) {
         Optional<List<TeamActivity>> teamActivityList = Optional.ofNullable(teamActivityRepository.findByTeamId(teamId));
-        return teamActivityList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No activities found for the team with id : " + teamId));
+        return teamActivityList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No activities found for the team with id: " + teamId));
     }
 
     public List<TeamActivity> getByActivityId (final Long activityId) {
         Optional<List<TeamActivity>> teamActivityList = Optional.ofNullable(teamActivityRepository.findByActivityId(activityId));
-        return teamActivityList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No teams found for the activity with id : " + activityId));
+        return teamActivityList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No teams found for the activity with id: " + activityId));
     }
 
     public TeamActivity saveTA (final TeamActivity teamActivity) {
