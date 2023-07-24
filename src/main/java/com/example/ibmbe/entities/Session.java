@@ -5,13 +5,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="session", schema="public")
+@Table(name="session", schema = "public")
 public class Session extends BaseEntity{
 
     @Column(name = "date", nullable = false)
     private String date;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "activityId", nullable = false)
+    @JoinColumn(name = "activityId", referencedColumnName = "id", nullable = false)
     private Activity activity;
 }

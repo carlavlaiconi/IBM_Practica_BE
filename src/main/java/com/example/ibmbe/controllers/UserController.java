@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public User getUserById (@RequestParam final long id) {
         return userService.getUser(id);
     }
 
-    @GetMapping("/{teamId}")
+    @GetMapping("/team/{id}")
     public List<User> getUserByTeamId (@RequestParam final long teamId) {
         return userService.getUserByTeamId(teamId);
     }

@@ -5,15 +5,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="grade", schema="public")
+@Table(name="grade", schema = "public")
 public class Grade extends BaseEntity{
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "studentId", nullable = false)
+    @JoinColumn(name = "studentId", referencedColumnName = "id", nullable = false)
     private User student;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "sessionId", nullable = false)
+    @JoinColumn(name = "sessionId", referencedColumnName = "id", nullable = false)
     private Session session;
 
     @Column(name = "grade", nullable = false)
@@ -23,7 +23,6 @@ public class Grade extends BaseEntity{
     private String comment;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "mentorId", nullable = false)
+    @JoinColumn(name = "mentorId", referencedColumnName = "id", nullable = false)
     private User mentor;
 }
-

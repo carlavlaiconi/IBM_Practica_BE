@@ -14,12 +14,12 @@ public class TeamActivityController {
     @Autowired
     private TeamActivityService teamActivityService;
 
-    @GetMapping("/{teamId}")
+    @GetMapping("/team/{teamId}")
     public List<TeamActivity> getByTeamId (@RequestParam final long teamId) {
         return teamActivityService.getByTeamId(teamId);
     }
 
-    @GetMapping("/{activityId}")
+    @GetMapping("/activity/{activityId}")
     public List<TeamActivity> getByActivityId (@RequestParam final long activityId) {
         return teamActivityService.getByActivityId(activityId);
     }

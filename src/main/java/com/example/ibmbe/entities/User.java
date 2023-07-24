@@ -1,12 +1,11 @@
 package com.example.ibmbe.entities;
 
-import com.example.ibmbe.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="users", schema="public")
+@Table(name="users", schema = "public")
 public class User extends BaseEntity{
 
     @Column(name = "name", nullable = false)
@@ -14,9 +13,9 @@ public class User extends BaseEntity{
     @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "role", nullable = false)
-    private Role role;
+    private String role;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "teamId", nullable = true)
+    @JoinColumn(name = "teamId", referencedColumnName = "id", nullable = true)
     private Team team;
 }
