@@ -16,12 +16,12 @@ public class GradeController {
     @Autowired
     private GradeService gradeService;
 
-    @GetMapping("/{studentId}")
+    @GetMapping("/student/{studentId}")
     public List<Grade> getGradeByStudentId (@RequestParam final long studentId) {
         return gradeService.getGradeByStudentId(studentId);
     }
 
-    @GetMapping("/{sessionId}")
+    @GetMapping("/session/{sessionId}")
     public List<Grade> getGradeBySessionId (@RequestParam final long sessionId) {
         return gradeService.getGradeBySessionId(sessionId);
     }
@@ -32,8 +32,8 @@ public class GradeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Grade> updateGrade(@PathVariable Long id, @RequestBody Grade updatedGrade) {
-        Grade grade = gradeService.updateGrade(id, updatedGrade);
+    public ResponseEntity<Grade> updateGrade(@RequestBody Grade updatedGrade) {
+        Grade grade = gradeService.updateGrade(updatedGrade);
         if (grade != null) {
             return new ResponseEntity<>(grade, HttpStatus.OK);
         } else {

@@ -15,7 +15,7 @@ public class SessionController {
     private SessionService sessionService;
 
     @GetMapping("/{activityId}")
-    public Session getSessionByActivityId (@RequestParam final Long activityId) {
+    public List<Session> getSessionByActivityId (@RequestParam final Long activityId) {
         return sessionService.getSessionByActivityId(activityId);
     }
 

@@ -16,12 +16,12 @@ public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
 
-    @GetMapping("/{studentId}")
+    @GetMapping("/student/{studentId}")
     public List<Attendance> getAttendanceByStudentId (@RequestParam final long studentId) {
         return attendanceService.getAttendanceByStudentId(studentId);
     }
 
-    @GetMapping("/{sessionId}")
+    @GetMapping("/session/{sessionId}")
     public List<Attendance> getAttendanceBySessionId (@RequestParam final long sessionId) {
         return attendanceService.getAttendanceBySessionId(sessionId);
     }
@@ -32,8 +32,8 @@ public class AttendanceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Attendance> updateAttendance(@PathVariable Long id, @RequestBody Attendance updatedAttendance) {
-        Attendance attendance = attendanceService.updateAttendance(id, updatedAttendance);
+    public ResponseEntity<Attendance> updateAttendance(@RequestBody Attendance updatedAttendance) {
+        Attendance attendance = attendanceService.updateAttendance(updatedAttendance);
         if (attendance != null) {
             return new ResponseEntity<>(attendance, HttpStatus.OK);
         } else {
