@@ -1,7 +1,8 @@
 package com.example.ibmbe.services;
 
 import com.example.ibmbe.entities.Grade;
-import com.example.ibmbe.exceptions.CustomException;
+import com.example.ibmbe.exceptions.NoGradeFoundBySessionException;
+import com.example.ibmbe.exceptions.NoGradeFoundByStudentException;
 import com.example.ibmbe.repositories.GradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,13 +18,13 @@ public class GradeService {
 
     public List<Grade> getGradeByStudentId (final Long studentId) {
         Optional<List<Grade>> grades = Optional.ofNullable(gradeRepository.findByStudentId(studentId));
-        return grades.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No grade with this student id: " + studentId + " found"));
+        return grades.orElseThrow(() -> new NoGradeFoundByStudentException(HttpStatus.NOT_FOUND));
     }
 
     public List<Grade> getGradeBySessionId (final Long sessionId) {
 
         Optional<List<Grade>> grades = Optional.ofNullable(gradeRepository.findBySessionId(sessionId));
-        return grades.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No grade with this session id: " + sessionId + " found"));
+        return grades.orElseThrow(() -> new NoGradeFoundBySessionException(HttpStatus.NOT_FOUND));
     }
 
     public Grade saveGrade (final Grade grade) {
@@ -32,7 +33,7 @@ public class GradeService {
 
     public Grade updateGrade(Grade updatedGrade) {
         Optional<Grade> optionalGrade = gradeRepository.findById(updatedGrade.getId());
-        optionalGrade.orElseThrow((() -> new RuntimeException("Grade with id: "+ updatedGrade.getId() + " not found")));
+        optionalGrade.orElseThrow((() -> new RuntimeException("Grade not found")));
         Grade existingGrade = optionalGrade.get();
         existingGrade.setGrade(updatedGrade.getGrade());
         existingGrade.setComment(updatedGrade.getComment());

@@ -1,7 +1,8 @@
 package com.example.ibmbe.services;
 
 import com.example.ibmbe.entities.Attendance;
-import com.example.ibmbe.exceptions.CustomException;
+import com.example.ibmbe.exceptions.NoAttendanceFoundBySessionException;
+import com.example.ibmbe.exceptions.NoAttendanceFoundByStudentException;
 import com.example.ibmbe.repositories.AttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +18,12 @@ public class AttendanceService {
 
     public List<Attendance> getAttendanceByStudentId (final Long studentId) {
         Optional<List<Attendance>> attendanceList = Optional.ofNullable(attendanceRepository.findByStudentId(studentId));
-        return attendanceList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No attendance with this student id: " + studentId + " found"));
+        return attendanceList.orElseThrow(() -> new NoAttendanceFoundByStudentException(HttpStatus.NOT_FOUND));
     }
 
     public List<Attendance> getAttendanceBySessionId (final Long sessionId) {
         Optional<List<Attendance>> attendanceList = Optional.ofNullable(attendanceRepository.findBySessionId(sessionId));
-        return attendanceList.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No attendance with this session id: " + sessionId + " found"));
+        return attendanceList.orElseThrow(() -> new NoAttendanceFoundBySessionException(HttpStatus.NOT_FOUND));
     }
 
     public Attendance saveAttendance (final Attendance attendance) {
@@ -31,7 +32,7 @@ public class AttendanceService {
 
     public Attendance updateAttendance(Attendance updatedAttendance) {
         Optional<Attendance> optionalAttendance = attendanceRepository.findById(updatedAttendance.getId());
-        optionalAttendance.orElseThrow((() -> new RuntimeException("Grade with id: " + updatedAttendance.getId() + " not found")));
+        optionalAttendance.orElseThrow((() -> new RuntimeException("Grade not found")));
         Attendance existingAttendance = optionalAttendance.get();
         existingAttendance.setPresent(updatedAttendance.isPresent());
         return attendanceRepository.save(existingAttendance);
