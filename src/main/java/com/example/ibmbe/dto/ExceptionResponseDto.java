@@ -1,4 +1,4 @@
-package com.example.ibmbe.exceptions;
+package com.example.ibmbe.dto;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,7 +1,7 @@
 package com.example.ibmbe.services;
 
 import com.example.ibmbe.entities.Team;
-import com.example.ibmbe.exceptions.CustomException;
+import com.example.ibmbe.exceptions.NoTeamFoundException;
 import com.example.ibmbe.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ public class TeamService {
 
     public Team getTeam (final Long id) {
         Optional<Team> teamOptional =  teamRepository.findById(id);
-        return teamOptional.orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "No team with id: " + id + " found"));
+        return teamOptional.orElseThrow(() -> new NoTeamFoundException(HttpStatus.NOT_FOUND));
     }
 
     public Team saveTeam (final Team team) {
