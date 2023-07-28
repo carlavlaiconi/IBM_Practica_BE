@@ -1,7 +1,7 @@
 package com.example.ibmbe.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
 
 
 @Entity
