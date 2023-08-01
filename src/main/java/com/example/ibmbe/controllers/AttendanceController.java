@@ -1,6 +1,7 @@
 package com.example.ibmbe.controllers;
 
 import com.example.ibmbe.entities.Attendance;
+import com.example.ibmbe.entities.Grade;
 import com.example.ibmbe.services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,14 +27,20 @@ public class AttendanceController {
         return attendanceService.getAttendanceBySessionId(sessionId);
     }
 
+    @GetMapping("/student&session/{studentId}{sessionId}")
+    public List<Attendance> getAttendanceByStudentIdAndSessionId (@RequestParam final long studentId, @RequestParam final long sessionId) {
+        return attendanceService.getAttendanceByStudentIdAndSessionId(studentId, sessionId);
+    }
+
     @PostMapping
     public Attendance createAttendance(@RequestBody final Attendance attendance) {
         return attendanceService.saveAttendance(attendance);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Attendance> updateAttendance(@RequestBody Attendance updatedAttendance) {
-        Attendance attendance = attendanceService.updateAttendance(updatedAttendance);
+
+    @PutMapping("/{studentId}{sessionId}")
+    public ResponseEntity<Attendance> updateAttendanceByStudentIdAndSessionId(@RequestParam Long studentId, @RequestParam Long sessionId) {
+        Attendance attendance = attendanceService.updateAttendanceByStudentIdAndSessionId(studentId, sessionId);
         if (attendance != null) {
             return new ResponseEntity<>(attendance, HttpStatus.OK);
         } else {

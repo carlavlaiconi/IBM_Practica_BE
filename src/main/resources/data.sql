@@ -93,11 +93,11 @@ INSERT INTO attendance (student_id, session_id, present) VALUES (3, 2, true);
 INSERT INTO attendance (student_id, session_id, present) VALUES (2, 2, true);
 INSERT INTO attendance (student_id, session_id, present) VALUES (1, 2, false);
 
-INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (1, 1, 90, 'Good work!', 1);
-INSERT INTO grade (student_id, session_id, grade, mentor_id) VALUES (2, 1, 85, 1);
-INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (3, 1, 78, 'Work harder next time.', 1);
-INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (3, 2, 92, 'Great improvement!', 1);
-INSERT INTO grade (student_id, session_id, grade, mentor_id) VALUES (2, 2, 87, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (1, 1, 90, 'Good work!', 2);
+INSERT INTO grade (student_id, session_id, grade, mentor_id) VALUES (2, 1, 85, 2);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (3, 1, 78, 'Work harder next time.', 2);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (3, 2, 92, 'Great improvement!', 2);
+INSERT INTO grade (student_id, session_id, grade, mentor_id) VALUES (2, 2, 87, 2);
 
 INSERT INTO team_activity (team_id, activity_id)
 SELECT DISTINCT u.team_id, s.activity_id
