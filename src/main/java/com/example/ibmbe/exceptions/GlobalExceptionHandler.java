@@ -71,7 +71,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoGradeFoundByStudentException.class)
-    public ResponseEntity<ExceptionResponseDto> handleConflictNoGradeFoundByStudentExceptionException(NoGradeFoundByStudentException exception){
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoGradeFoundByStudentException(NoGradeFoundByStudentException exception){
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto(
                 exception.getHttpStatus().value(),
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoGradeFoundBySessionException.class)
-    public ResponseEntity<ExceptionResponseDto> handleConflictNoGradeFoundBySessionExceptionException(NoGradeFoundBySessionException exception){
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoGradeFoundBySessionException(NoGradeFoundBySessionException exception){
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto(
                 exception.getHttpStatus().value(),
@@ -95,7 +95,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoAttendanceFoundByStudentException.class)
-    public ResponseEntity<ExceptionResponseDto> handleConflictNoAttendanceFoundByStudentExceptionException(NoAttendanceFoundByStudentException exception){
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoAttendanceFoundByStudentException(NoAttendanceFoundByStudentException exception){
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto(
                 exception.getHttpStatus().value(),
@@ -107,7 +107,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoAttendanceFoundBySessionException.class)
-    public ResponseEntity<ExceptionResponseDto> handleConflictNoAttendanceFoundBySessionExceptionException(NoAttendanceFoundBySessionException exception){
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoAttendanceFoundBySessionException(NoAttendanceFoundBySessionException exception){
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto(
                 exception.getHttpStatus().value(),
@@ -119,7 +119,55 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoActivityFoundByTeamException.class)
-    public ResponseEntity<ExceptionResponseDto> handleConflictNoActivityFoundByTeamExceptionException(NoActivityFoundByTeamException exception){
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoActivityFoundByTeamException(NoActivityFoundByTeamException exception){
+
+        ExceptionResponseDto responseDto = new ExceptionResponseDto(
+                exception.getHttpStatus().value(),
+                exception.getHttpStatus().getReasonPhrase(),
+                exception.getMessage()
+        );
+
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @ExceptionHandler(NoUserFoundByTeamIdAndEmailException.class)
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoUserFoundByTeamIdAndEmailException(NoUserFoundByTeamIdAndEmailException exception){
+
+        ExceptionResponseDto responseDto = new ExceptionResponseDto(
+                exception.getHttpStatus().value(),
+                exception.getHttpStatus().getReasonPhrase(),
+                exception.getMessage()
+        );
+
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @ExceptionHandler(NoGradeFoundByStudentIdAndSessionIdException.class)
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoGradeFoundByStudentIdAndSessionIdException(NoGradeFoundByStudentIdAndSessionIdException exception){
+
+        ExceptionResponseDto responseDto = new ExceptionResponseDto(
+                exception.getHttpStatus().value(),
+                exception.getHttpStatus().getReasonPhrase(),
+                exception.getMessage()
+        );
+
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @ExceptionHandler(NoGradeFoundByMentorIdAndSessionIdException.class)
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoGradeFoundByMentorIdAndSessionIdException(NoGradeFoundByMentorIdAndSessionIdException exception){
+
+        ExceptionResponseDto responseDto = new ExceptionResponseDto(
+                exception.getHttpStatus().value(),
+                exception.getHttpStatus().getReasonPhrase(),
+                exception.getMessage()
+        );
+
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @ExceptionHandler(NoAttendanceFoundByStudentIdAndSessionIdException.class)
+    public ResponseEntity<ExceptionResponseDto> handleConflictNoAttendanceFoundByStudentIdAndSessionIdException(NoAttendanceFoundByStudentIdAndSessionIdException exception){
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto(
                 exception.getHttpStatus().value(),

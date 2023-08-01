@@ -30,12 +30,14 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUserById (@RequestParam final long id) {
-        boolean deleted = userService.deleteUserById(id);
+
+    @DeleteMapping("/teamId&email/{teamId}{email}")
+    public ResponseEntity<Void> deleteUserByTeamIdEmail (@RequestParam final long teamId, @RequestParam final String email) {
+        boolean deleted = userService.deleteUserByTeamIdAndEmail(teamId, email);
         if (deleted)
             return ResponseEntity.noContent().build();
         else
             return ResponseEntity.notFound().build();
     }
+
 }

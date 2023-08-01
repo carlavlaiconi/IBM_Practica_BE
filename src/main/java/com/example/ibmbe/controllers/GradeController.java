@@ -16,14 +16,19 @@ public class GradeController {
     @Autowired
     private GradeService gradeService;
 
-    @GetMapping("/student/{studentId}")
-    public List<Grade> getGradeByStudentId (@RequestParam final long studentId) {
-        return gradeService.getGradeByStudentId(studentId);
-    }
-
     @GetMapping("/session/{sessionId}")
     public List<Grade> getGradeBySessionId (@RequestParam final long sessionId) {
         return gradeService.getGradeBySessionId(sessionId);
+    }
+
+    @GetMapping("/student/{studentId}{sessionId}")
+    public List<Grade> getGradeByStudentIdAndSessionId (@RequestParam final long studentId, @RequestParam final long sessionId) {
+        return gradeService.getGradeByStudentIdAndSessionId(studentId, sessionId);
+    }
+
+    @GetMapping("/mentor/{mentorId}{sessionId}")
+    public List<Grade> getGradeByMentorIdAndSessionId (@RequestParam final long mentorId, @RequestParam final long sessionId) {
+        return gradeService.getGradeByMentorIdAndSessionId(mentorId, sessionId);
     }
 
     @PostMapping
@@ -31,9 +36,9 @@ public class GradeController {
         return gradeService.saveGrade(grade);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Grade> updateGrade(@RequestBody Grade updatedGrade) {
-        Grade grade = gradeService.updateGrade(updatedGrade);
+    @PutMapping("/{studentId}{sessionId}{mentorId}")
+    public ResponseEntity<Grade> updateGradeByStudentIdSessionIdAndMentorId(@RequestParam final Long studentId, @RequestParam final Long sessionId, @RequestParam final Long mentorId, @RequestParam final int newGrade, @RequestParam(required = false) final String comment) {
+        Grade grade = gradeService.updateGradeByStudentIDSessionIdAndMentorId(studentId, sessionId, mentorId, newGrade, comment);
         if (grade != null) {
             return new ResponseEntity<>(grade, HttpStatus.OK);
         } else {

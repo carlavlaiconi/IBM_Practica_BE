@@ -3,6 +3,7 @@ package com.example.ibmbe.controllers;
 import com.example.ibmbe.entities.TeamActivity;
 import com.example.ibmbe.services.TeamActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,5 +28,14 @@ public class TeamActivityController {
     @PostMapping
     public TeamActivity createTA (@RequestBody final TeamActivity teamActivity) {
         return teamActivityService.saveTA(teamActivity);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTeamActivityById (@RequestParam final long id) {
+        boolean deleted = teamActivityService.deleteTeamActivityById(id);
+        if (deleted)
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.notFound().build();
     }
 }

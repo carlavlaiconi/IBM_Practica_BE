@@ -19,11 +19,6 @@ public class SessionController {
         return sessionService.getSessionByActivityId(activityId);
     }
 
-    @GetMapping
-    public List<Session> getAllSessions () {
-        return sessionService.getAllSessions();
-    }
-
     @PostMapping
     public Session createSession(@RequestBody final Session session) {
         return sessionService.saveSession(session);

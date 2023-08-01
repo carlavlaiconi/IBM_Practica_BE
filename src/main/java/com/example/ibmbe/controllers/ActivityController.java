@@ -18,4 +18,9 @@ public class ActivityController {
     public List<Activity> getAllActivities () {
         return activityService.getAllActivities();
     }
+
+    @PostMapping
+    public Activity createActivity(@RequestBody final Activity activity) {
+        return activityService.saveActivity(activity);
+    }
 }

@@ -20,9 +20,6 @@ public class SessionService {
         return sessionList.orElseThrow(() -> new NoSessionFoundByActivityException(HttpStatus.NOT_FOUND));
     }
 
-    public List<Session> getAllSessions () {
-        return sessionRepository.findAll();
-    }
 
     public Session saveSession (final Session session) {
         return sessionRepository.save(session);

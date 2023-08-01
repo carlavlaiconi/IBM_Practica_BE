@@ -2,6 +2,7 @@ package com.example.ibmbe.services;
 
 import com.example.ibmbe.entities.TeamActivity;
 import com.example.ibmbe.exceptions.NoActivityFoundByTeamException;
+import com.example.ibmbe.exceptions.NoTeamActivityFoundException;
 import com.example.ibmbe.exceptions.NoTeamFoundByActivityException;
 import com.example.ibmbe.repositories.TeamActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,13 @@ public class TeamActivityService {
 
     public TeamActivity saveTA (final TeamActivity teamActivity) {
         return teamActivityRepository.save(teamActivity);
+    }
+
+    public boolean deleteTeamActivityById (Long id) {
+        if (teamActivityRepository.existsById(id)) {
+            teamActivityRepository.deleteById(id);
+            return true;
+        }
+        throw(new NoTeamActivityFoundException(HttpStatus.NOT_FOUND));
     }
 }
