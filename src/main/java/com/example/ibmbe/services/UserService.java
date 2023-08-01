@@ -35,8 +35,6 @@ public class UserService {
     }
 
     public boolean deleteUserByTeamIdAndEmail (Long teamId, String email) {
-        System.out.println("////////////");
-        System.out.println(userRepository.existsByTeamIdAndEmail(teamId, email));
         if (userRepository.existsByTeamIdAndEmail(teamId, email)) {
             User user=userRepository.findIdByTeamIdAndEmail(teamId, email);
             user.setTeam(null);
