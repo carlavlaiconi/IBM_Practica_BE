@@ -22,7 +22,7 @@ public class TeamActivityController {
     }
 
     @GetMapping("/activity/{activityId}")
-    public List<TeamActivity> getByActivityId (@RequestParam final long activityId) {
+    public List<TeamActivity> getByActivityId (@PathVariable final long activityId) {
         return teamActivityService.getByActivityId(activityId);
     }
 

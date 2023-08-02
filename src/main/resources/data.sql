@@ -53,7 +53,8 @@ CREATE TABLE IF NOT EXISTS grade (
                                      session_id INT,
                                      grade INT NOT NULL,
                                      comment VARCHAR(500),
-                                     mentor_id INT
+                                     mentor_id INT,
+                                     activity_id INT
 );
 
 CREATE TABLE IF NOT EXISTS team_activity (
@@ -73,19 +74,35 @@ INSERT INTO team (name) VALUES ('Team C');
 INSERT INTO team (name) VALUES ('Team D');
 
 INSERT INTO users (name, email, role, team_id) VALUES ('John Doe', 'john.doe@example.com', 'leader', 1);
-INSERT INTO users (name, email, role) VALUES ('Jane Smith', 'jane.smith@example.com', 'mentor');
 INSERT INTO users (name, email, role, team_id) VALUES ('Emily Johnson', 'emily.johnson@example.com', 'student', 2);
-INSERT INTO users (name, email, role) VALUES ('Michael Brown', 'michael.brown@example.com', 'student');
+INSERT INTO users (name, email, role, team_id) VALUES ('Michael Brown', 'michael.brown@example.com', 'student', 2);
 INSERT INTO users (name, email, role, team_id) VALUES ('Sophia Lee', 'sophia.lee@example.com', 'student', 1);
+INSERT INTO users (name, email, role, team_id) VALUES ('Johnny Doe', 'johnny.doe@example.com', 'leader', 2);
+INSERT INTO users (name, email, role, team_id) VALUES ('Emily Green', 'emilly.green@example.com', 'student', 2);
+INSERT INTO users (name, email, role, team_id) VALUES ('Michaela Brown', 'michaela.brown2@example.com', 'student', 2);
+INSERT INTO users (name, email, role, team_id) VALUES ('Elena Doe', 'elena.doe@example.com', 'student', 1);
+INSERT INTO users (name, email, role, team_id) VALUES ('Anna Doe', 'anna.doe@example.com', 'student', 1);
+INSERT INTO users (name, email, role, team_id) VALUES ('Rachel Johnson', 'rachel.johnson@example.com', 'student', 3);
+INSERT INTO users (name, email, role, team_id) VALUES ('Ross Green', 'ross.green@example.com', 'leader', 3);
+INSERT INTO users (name, email, role, team_id) VALUES ('Andreea Jack', 'andreea.jack@example.com', 'student', 3);
+INSERT INTO users (name, email, role, team_id) VALUES ('Joey Brown', 'joey.brown@example.com', 'student', 3);
+INSERT INTO users (name, email, role, team_id) VALUES ('Elisabeth Lee', 'elisabeth.lee@example.com', 'student', 1);
+INSERT INTO users (name, email, role) VALUES ('Jane Smith', 'jane.smith@example.com', 'mentor');
+INSERT INTO users (name, email, role) VALUES ('Janice Smith', 'janice.smith@example.com', 'mentor');
+INSERT INTO users (name, email, role) VALUES ('Jack John', 'jack.john@example.com', 'mentor');
+INSERT INTO users (name, email, role) VALUES ('Anna Smith', 'anna.smith@example.com', 'mentor');
+INSERT INTO users (name, email, role) VALUES ('Marry Jane', 'marry.jane@example.com', 'mentor');
+INSERT INTO users (name, email, role) VALUES ('Rachel Smith', 'rachel.smith@example.com', 'mentor');
 
-INSERT INTO activity (name) VALUES ('Activity 1');
+
+INSERT INTO activity (name) VALUES ('Summer practice');
 INSERT INTO activity (name) VALUES ('Activity 2');
 INSERT INTO activity (name) VALUES ('Activity 3');
-INSERT INTO activity (name) VALUES ('Activity 4');
 
 INSERT INTO session (date, activity_id) VALUES ('2023-07-18', 1);
 INSERT INTO session (date, activity_id) VALUES ('2023-07-19', 2);
-INSERT INTO session (date, activity_id) VALUES ('2023-07-20', 1);
+INSERT INTO session (date, activity_id) VALUES ('2023-07-22', 1);
+INSERT INTO session (date, activity_id) VALUES ('2023-07-30', 2);
 
 INSERT INTO attendance (student_id, session_id, present) VALUES (2, 1, true);
 INSERT INTO attendance (student_id, session_id, present) VALUES (1, 1, false);
@@ -93,11 +110,63 @@ INSERT INTO attendance (student_id, session_id, present) VALUES (3, 2, true);
 INSERT INTO attendance (student_id, session_id, present) VALUES (2, 2, true);
 INSERT INTO attendance (student_id, session_id, present) VALUES (1, 2, false);
 
-INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (1, 1, 90, 'Good work!', 2);
-INSERT INTO grade (student_id, session_id, grade, mentor_id) VALUES (2, 1, 85, 2);
-INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (3, 1, 78, 'Work harder next time.', 2);
-INSERT INTO grade (student_id, session_id, grade, comment, mentor_id) VALUES (3, 2, 92, 'Great improvement!', 2);
-INSERT INTO grade (student_id, session_id, grade, mentor_id) VALUES (2, 2, 87, 2);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (1, 1, 9, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (1, 1, 10, 'Well done!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (1, 3, 8, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (1, 3, 4, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (2, 1, 6, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (2, 1, 7, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (2, 3, 10, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (2, 3, 8, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (3, 1, 9, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (3, 1, 8, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (3, 3, 8, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (3, 3, 9, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (4, 1, 7, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (4, 1, 10, 'Good work!', 20, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (4, 3, 10, 'Good work!', 19, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (4, 3, 8, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (5, 1, 9, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (5, 1, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (5, 3, 8, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (5, 3, 8, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (6, 1, 9, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (6, 1, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (6, 3, 8, 'Good work!', 20, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (6, 3, 4, 'Good work!', 19, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (7, 1, 6, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (7, 1, 7, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (7, 3, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (7, 3, 8, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (8, 1, 9, 'Good work!', 19, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (8, 1, 8, 'Good work!', 20, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (8, 3, 8, 'Good work!', 20, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (8, 3, 9, 'Good work!', 19, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (9, 1, 7, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (9, 1, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (9, 3, 10, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (9, 3, 8, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (10, 1, 9, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (10, 1, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (10, 3, 8, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (10, 3, 8, 'Good work!', 19, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (11, 1, 6, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (11, 1, 7, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (12, 3, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (12, 3, 8, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (13, 1, 9, 'Good work!', 19, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (13, 1, 8, 'Good work!', 20, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (13, 3, 8, 'Good work!', 20, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (13, 3, 9, 'Good work!', 19, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (14, 1, 7, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (14, 1, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (14, 3, 10, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (14, 3, 8, 'Good work!', 15, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (12, 1, 9, 'Good work!', 16, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (12, 1, 10, 'Good work!', 17, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (11, 3, 8, 'Good work!', 18, 1);
+INSERT INTO grade (student_id, session_id, grade, comment, mentor_id, activity_id) VALUES (11, 3, 8, 'Good work!', 19, 1);
+
 
 INSERT INTO team_activity (team_id, activity_id)
 SELECT DISTINCT u.team_id, s.activity_id
