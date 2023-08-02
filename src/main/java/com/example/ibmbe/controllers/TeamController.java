@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/team")
 public class TeamController {
 
@@ -13,8 +14,13 @@ public class TeamController {
     private TeamService teamService;
 
     @GetMapping("/{id}")
-    public Team getTeamById (@RequestParam final long id) {
+    public Team getTeamById (@PathVariable final long id) {
         return teamService.getTeam(id);
+    }
+
+    @GetMapping("/teamAverage/{id}/{activityId}")
+    public Double getTeamAverage (@PathVariable final long id, @PathVariable final long activityId) {
+        return teamService.getTeamAverage(id, activityId);
     }
 
     @PostMapping

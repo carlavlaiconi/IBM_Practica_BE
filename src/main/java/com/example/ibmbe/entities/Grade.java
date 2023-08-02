@@ -26,6 +26,10 @@ public class Grade extends BaseEntity{
     @JoinColumn(name = "mentorId", referencedColumnName = "id", nullable = false)
     private User mentor;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "activityId", referencedColumnName = "id", nullable = false)
+    private Activity activity;
+
     public Grade() {
     }
 

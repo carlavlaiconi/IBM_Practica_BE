@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/grade")
 public class GradeController {
 
@@ -21,14 +22,27 @@ public class GradeController {
         return gradeService.getGradeBySessionId(sessionId);
     }
 
-    @GetMapping("/student/{studentId}{sessionId}")
-    public List<Grade> getGradeByStudentIdAndSessionId (@RequestParam final long studentId, @RequestParam final long sessionId) {
-        return gradeService.getGradeByStudentIdAndSessionId(studentId, sessionId);
+    @GetMapping("/student/{studentId}{sessionId}{activiyId}")
+    public List<Grade> getGradeByStudentIdAndSessionIdAndActivityId (@RequestParam final long studentId, @RequestParam final long sessionId, @RequestParam final long activityId) {
+        return gradeService.getGradeByStudentIdAndSessionIdAndAcitivityId(studentId, sessionId, activityId);
     }
+
+//    @GetMapping("/activity/{studentId}{activityId}")
+//    public List<Grade> getGradeByStudentIdAndACtivityId (@RequestParam final long studentId, @RequestParam final long activityId) {
+//        return gradeService.getGradeByStudentIdAndActivityId(studentId, activityId);
+//    }
 
     @GetMapping("/mentor/{mentorId}{sessionId}")
     public List<Grade> getGradeByMentorIdAndSessionId (@RequestParam final long mentorId, @RequestParam final long sessionId) {
         return gradeService.getGradeByMentorIdAndSessionId(mentorId, sessionId);
+    }
+    @GetMapping("/activity/{studentId}{activityId}{sessionId}")
+    public Double getAverageGrade(@PathVariable final long studentId, @PathVariable final long activityId, @PathVariable final long sessionId) {
+        return gradeService.getAverageGrade(studentId, activityId, sessionId);
+    }
+    @GetMapping("/average/{studentId}/{activityId}")
+    public Double getAverage(@PathVariable final long studentId, @PathVariable final long activityId) {
+        return gradeService.getAverage(studentId, activityId);
     }
 
     @PostMapping
